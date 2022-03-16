@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MessageCM{% endblock %}
+
+{% block body %}
+    <h1>MessageCM</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ message_cm.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ message_cm.titre }}</td>
+            </tr>
+            <tr>
+                <th>Texte</th>
+                <td>{{ message_cm.texte }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_message_cm_index') }}">back to list</a>
+
+    <a href="{{ path('app_message_cm_edit', {'id': message_cm.id}) }}">edit</a>
+
+    {{ include('message_cm/_delete_form.html.twig') }}
+{% endblock %}

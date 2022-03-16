@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -25,6 +27,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string')]
     private $password;
+
+    #[ORM\OneToMany(mappedBy: 'commercial', targetEntity: Entreprise::class)]
+    private $entreprise;
+
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: MessageCM::class)]
+    private $message_cm;
+
+    #[ORM\ManyToOne(targetEntity: Entreprise::class, inversedBy: 'employes')]
+    private $employe;
+
+    public function __construct()
+    {
+        $this->entreprise = new ArrayCollection();
+        $this->message_cm = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -94,5 +111,82 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+
+    
+    //le getEntreprise correspond la liste des entreprise Gerer par le commercial
+    /**
+     * @return Collection<int, Entreprise>
+     */
+    public function getEntreprise(): Collection
+    {
+        return $this->entreprise;
+    }
+
+    public function addEntreprise(Entreprise $entreprise): self
+    {
+        if (!$this->entreprise->contains($entreprise)) {
+            $this->entreprise[] = $entreprise;
+            $entreprise->setCommercial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEntreprise(Entreprise $entreprise): self
+    {
+        if ($this->entreprise->removeElement($entreprise)) {
+            // set the owning side to null (unless already changed)
+            if ($entreprise->getCommercial() === $this) {
+                $entreprise->setCommercial(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MessageCM>
+     */
+    public function getMessageCm(): Collection
+    {
+        return $this->message_cm;
+    }
+
+    public function addMessageCm(MessageCM $messageCm): self
+    {
+        if (!$this->message_cm->contains($messageCm)) {
+            $this->message_cm[] = $messageCm;
+            $messageCm->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessageCm(MessageCM $messageCm): self
+    {
+        if ($this->message_cm->removeElement($messageCm)) {
+            // set the owning side to null (unless already changed)
+            if ($messageCm->getClient() === $this) {
+                $messageCm->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    //le getEmploye correspond l'entreprise qui emploi cet User
+    public function getEmploye(): ?Entreprise
+    {
+        return $this->employe;
+    }
+
+    public function setEmploye(?Entreprise $employe): self
+    {
+        $this->employe = $employe;
+
+        return $this;
     }
 }

@@ -31,22 +31,15 @@ class RegistrationFormType extends AbstractType
                 'choices' => [
 
                     'Commercial' => 'ROLE_COMMERCIAL',
-                    'Administrateur' => 'ROLE_ADMIN'
-                ],
-                'expanded' => true,
-                'multiple' => true,
-                'label' => 'Rôles' 
-            ])
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Utilisateur' => 'ROLE_USER',
+                    'Administrateur' => 'ROLE_ADMIN',
                     'Client' => 'ROLE_CLIENT',
-
+                    'Utilisateur' => 'ROLE_USER'
                 ],
                 'expanded' => true,
                 'multiple' => true,
                 'label' => 'Rôles' 
             ])
+
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
