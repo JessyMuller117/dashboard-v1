@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de
+	{{user.email}}
+{% endblock %}
+
+{% block body %}
+
+{% if user.entreprise | length > 0 %}
+
+{% for ent in user.entreprise %}
+    {{ent.nomentreprise}}
+{% endfor %}
+			<div class="alert alert-warning">
+				<p>
+					<strong>{{user.email}}</strong>
+					n'a pas encore créé de focus Lieu !
+				</p>
+			</div>
+		{% endif %}
+{% endblock %}

@@ -29,6 +29,9 @@ class MessageCMController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $messageCM->setClient($this->getUser());
             $messageCMRepository->add($messageCM);
             return $this->redirectToRoute('app_message_cm_index', [], Response::HTTP_SEE_OTHER);
         }

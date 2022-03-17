@@ -14,7 +14,7 @@ class MessageCMType extends AbstractType
         $builder
             ->add('titre')
             ->add('texte')
-            ->add('client')
+            // ->add('client')
         ;
     }
 
