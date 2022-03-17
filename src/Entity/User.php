@@ -37,6 +37,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(targetEntity: Entreprise::class, inversedBy: 'employes')]
     private $employe;
 
+    #[ORM\Column(type: 'boolean')]
+    private $collaborateur_neweb;
+
     public function __construct()
     {
         $this->entreprise = new ArrayCollection();
@@ -186,6 +189,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmploye(?Entreprise $employe): self
     {
         $this->employe = $employe;
+
+        return $this;
+    }
+
+    public function getCollaborateurNeweb(): ?bool
+    {
+        return $this->collaborateur_neweb;
+    }
+
+    public function setCollaborateurNeweb(bool $collaborateur_neweb): self
+    {
+        $this->collaborateur_neweb = $collaborateur_neweb;
 
         return $this;
     }

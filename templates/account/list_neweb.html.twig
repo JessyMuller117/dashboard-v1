@@ -6,13 +6,13 @@
 
 {% block body %}
 
-<pre>
-    {{ dump(users) }}
-</pre>
 
+{% for user in users %}
+{% if user.collaborateurneweb %}
+{{user.email}}
+{% endif %}
+  
+{% endfor %}
 
- {% for role in users %}
-    {{role.email}}
-{% endfor %} 
 
 {% endblock %}

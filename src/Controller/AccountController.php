@@ -55,4 +55,26 @@ class AccountController extends AbstractController
             'user' => $this->getUser()
         ]);
     }
+
+
+    #Function qui devrait m'afficher tous les clients
+    #[Route('/account/client', name: 'app_account_client')]
+    #[IsGranted('ROLE_USER')]
+    public function listClient(UserRepository $userRepository){
+        return $this->render('account/list_client.html.twig', [
+            'users' => $userRepository->findAll(),
+            'user' => $this->getUser()
+        ]);
+    }
+
+    #Function qui devrait m'afficher tous les utilisateur
+    #[Route('/account/utilisateur', name: 'app_account_user')]
+    #[IsGranted('ROLE_USER')]
+    public function listUser(UserRepository $userRepository){
+        return $this->render('account/list_utilisateur.html.twig', [
+            'users' => $userRepository->findAll(),
+            'user' => $this->getUser()
+        ]);
+    }
 }
+

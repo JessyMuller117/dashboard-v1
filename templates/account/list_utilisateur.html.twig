@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de
+	{{user.email}}
+{% endblock %}
+
+{% block body %}
+
+
+{% for user in users %}
+
+{{user.email}}
+
+  
+{% endfor %}
+
+
+{% endblock %}
