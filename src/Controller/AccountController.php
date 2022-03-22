@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\AccountType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AccountController extends AbstractController
 {
-    #Permet d'afficher et de traiter le formulaire de modification du profil
+    #Permet d'afficher et de traiter le formulaire de modification du profil connecter
     #[Route('/account/profile', name: 'app_account_profile')]
     #[IsGranted('ROLE_USER')]
     public function profile(Request $request, EntityManagerInterface $manager): Response
@@ -34,6 +35,24 @@ class AccountController extends AbstractController
         }
         return $this->render('account/index.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    // Permet d'editer un profil !! uniquement visible depuis les admin
+    #[Route('/admin/{id}/edit', name: 'app_utilisateur_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+    {
+        $form = $this->createForm(AccountType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository->add($user);
+            return $this->redirectToRoute('app_account_user', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('account/index.html.twig', [
+            'user' => $user,
+            'form' => $form,
         ]);
     }
 

@@ -1,21 +1,62 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Page de
-	{{user.email}}
+	{{user.prenom}}
 {% endblock %}
 
 {% block body %}
+	<h1>Bienvenue sur ton profil
+		{{user.nom}} {{user.prenom}} </h1>
 
-{% if user.entreprise | length > 0 %}
+	<h2>Voici les entreprises que ta conquéris</h2>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nom Entreprise</th>
+				<th>SIRET</th>
+				<th>Adresse</th>
+				<th>Postale</th>
+				<th>Ville</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if user.entreprise | length > 0 %}
 
-{% for ent in user.entreprise %}
-    {{ent.nomentreprise}}
-{% endfor %}
-			<div class="alert alert-warning">
-				<p>
-					<strong>{{user.email}}</strong>
-					n'a pas encore créé de focus Lieu !
-				</p>
+				{% for ent in user.entreprise %}
+					<tr>
+
+						<td>{{ ent.id }}</td>
+						<td>{{ ent.nomentreprise }}</td>
+						<td>{{ ent.siret }}</td>
+						<td>{{ ent.adresse }}</td>
+						<td>{{ ent.postale }}</td>
+						<td>{{ ent.ville }}</td>
+					</tr>
+
+				{% endfor %}
+
+			{% endif %}
+		</tbody>
+	</table>
+	<h2>Les informations de ton profil</h2>
+	<section style="margin: 80px 0;" class="container">
+		<div class="row">
+			<div class="card col-6">
+				<h5 class="card-header">{{user.nom}}
+					-
+					{{user.prenom}} <span class="badge bg-primary">{{user.entreprise | length}}</span></h5>
+				<div class="card-body">
+					<h5 class="card-title">{{user.telephone}}</h5>
+					<p class="card-text">{{user.email}}</p>
+					<a href="{{ path('app_account_profile')}}" class="btn btn-primary">Modifier mon profil</a>
+				</div>
 			</div>
-		{% endif %}
+
+		</div>
+
+	</section>
+	<button type="button" class="btn btn-success">
+		<a style="color: white;" href="{{ path('app_entreprise_new') }}">Ajouter une Entreprise</a>
+	</button>
 {% endblock %}

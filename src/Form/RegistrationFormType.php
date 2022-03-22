@@ -38,6 +38,13 @@ class RegistrationFormType extends AbstractType
                 'multiple' => true,
                 'label' => 'Rôles' 
             ])
+            ->add('collaborateur_neweb', CheckboxType::class,[
+                'label' => 'Cet utitlisateur fait parti de N3web ?',
+                'required' => true,
+            ])
+            ->add('nom')
+            ->add('prenom')
+            ->add('telephone')
 
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
