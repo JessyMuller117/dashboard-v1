@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Entreprise;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -46,6 +48,10 @@ class RegistrationFormType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('telephone')
+            // ->add('employe', EntityType::class,[
+            //     'class' => Entreprise::class,
+            //     'choice_label' => 'nom_entreprise'
+            // ])
 
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
