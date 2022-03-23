@@ -21,7 +21,7 @@ class MessageCM
     #[ORM\Column(type: 'text', nullable: true)]
     private $texte;
 
-    #[ORM\OneToMany(mappedBy: 'messageCM', targetEntity: ImageCM::class)]
+    #[ORM\OneToMany(mappedBy: 'messageCM', targetEntity: ImageCM::class, orphanRemoval: true, cascade: ['persist'])]
     private $contenu_image;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'message_cm')]

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\AccountType;
 use App\Repository\UserRepository;
+use App\Repository\MessageCMRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,9 +60,10 @@ class AccountController extends AbstractController
     #Permet d'afficherle profil de l'utilisateur connecter
     #[Route('/account', name: 'app_account_index')]
     #[IsGranted('ROLE_USER')]
-    public function myAccount(){
+    public function myAccount(MessageCMRepository $messageCMRepository){
         return $this->render('account/user.html.twig', [
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'message_cms' => $messageCMRepository->findAll(),
         ]);
     }
 

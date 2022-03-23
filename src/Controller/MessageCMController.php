@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\ImageCM;
 use App\Entity\MessageCM;
 use App\Form\MessageCMType;
 use App\Repository\MessageCMRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +24,7 @@ class MessageCMController extends AbstractController
     }
 
     #[Route('/new', name: 'app_message_cm_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, MessageCMRepository $messageCMRepository): Response
+    public function new(Request $request, MessageCMRepository $messageCMRepository, ManagerRegistry $doctrine): Response
     {
         $messageCM = new MessageCM();
         $form = $this->createForm(MessageCMType::class, $messageCM);
@@ -30,6 +32,30 @@ class MessageCMController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //Je récupére les images transmises
+            $images = $form->get('contenu_image')->getData();
+
+            //On boucle sur les images
+            foreach ($images as $image) {
+                //Je génére un nouveau nom de fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                //Je copie le fichier dnas le dossier uploads
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                $entityManager = $doctrine->getManager();
+
+                $img = new ImageCM();
+                $img->setName($fichier);
+                $messageCM->addContenuImage($img);
+            }
+            $entityManager->persist($messageCM);
+
+            // actually executes the queries (i.e. the INSERT query)
+            $entityManager->flush();
 
             $messageCM->setClient($this->getUser());
             $messageCMRepository->add($messageCM);
@@ -51,12 +77,36 @@ class MessageCMController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_message_cm_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, MessageCM $messageCM, MessageCMRepository $messageCMRepository): Response
+    public function edit(Request $request, MessageCM $messageCM, MessageCMRepository $messageCMRepository, ManagerRegistry $doctrine): Response
     {
         $form = $this->createForm(MessageCMType::class, $messageCM);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+              //Je récupére les images transmises
+              $images = $form->get('contenu_image')->getData();
+
+              //On boucle sur les images
+              foreach ($images as $image) {
+                  //Je génére un nouveau nom de fichier
+                  $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+  
+                  //Je copie le fichier dnas le dossier uploads
+                  $image->move(
+                      $this->getParameter('images_directory'),
+                      $fichier
+                  );
+  
+                  $entityManager = $doctrine->getManager();
+  
+                  $img = new ImageCM();
+                  $img->setName($fichier);
+                  $messageCM->addContenuImage($img);
+              }
+              $entityManager->persist($messageCM);
+  
+              // actually executes the queries (i.e. the INSERT query)
+              $entityManager->flush();
             $messageCMRepository->add($messageCM);
             return $this->redirectToRoute('app_message_cm_index', [], Response::HTTP_SEE_OTHER);
         }

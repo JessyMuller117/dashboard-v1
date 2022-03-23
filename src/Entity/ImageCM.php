@@ -19,6 +19,9 @@ class ImageCM
     #[ORM\ManyToOne(targetEntity: MessageCM::class, inversedBy: 'contenu_image')]
     private $messageCM;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $name;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class ImageCM
     public function setMessageCM(?MessageCM $messageCM): self
     {
         $this->messageCM = $messageCM;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

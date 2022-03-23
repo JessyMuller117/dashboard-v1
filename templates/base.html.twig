@@ -67,7 +67,18 @@
 												</li>
 
 											{% endif %}
+											{% if app.user and role == 'ROLE_CM' %}
+											<li class="nav-item">
+													<a class="nav-link" href="{{path('app_message_cm_index')}}">Tous les messages</a>
+												</li>
+											{% endif %}
 										{% endfor %}
+									{% endif %}
+									{% if app.user and app.user.collaborateurneweb == false %}
+									<li class="nav-item">
+											<a class="nav-link" href="{{path('app_message_cm_new')}}">Envoyer des images</a>
+										</li>
+										
 									{% endif %}
 								</ul>
 							</li>
@@ -84,9 +95,17 @@
 								{{app.user.prenom}}
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li>
-									<a href="{{ path('app_entreprise_new')}}" class="dropdown-item">Ajouter un client</a>
-								</li>
+								{% if app.user %}
+									{% for role in app.user.roles %}
+										{% if app.user and role == 'ROLE_ADMIN' and 'ROLE_COMMERCIAL' %}
+											<li>
+												<a href="{{ path('app_entreprise_new')}}" class="dropdown-item">Ajouter une entreprise</a>
+											</li>
+
+										{% endif %}
+									{% endfor %}
+								{% endif %}
+
 								<li>
 									<a href="{{ path('app_account_index') }}" class="dropdown-item">Mon Compte</a>
 								</li>
