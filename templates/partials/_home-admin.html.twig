@@ -1,0 +1,72 @@
+<section class="pt-5 container-fluid">
+	<div class="row">
+		<div class="col-lg-6 col-xl-3 mb-4">
+			<div class="card bg-success text-white h-100">
+				<div class="card-body">
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="me-3">
+							<div class="text-white-75 small">Nombre d'Entreprise</div>
+							<div class="text-lg fw-bold">{{ entreprises | length }}</div>
+						</div>
+					</div>
+				</div>
+                <div class="card-footer d-flex align-items-center justify-content-between small">
+                <a href="{{ path('app_entreprise_new') }}">Ajouter une entreprise</a>
+                <div class="text-white">+</div>
+
+                </div>
+			</div>
+		</div>
+        
+		<div class="col-lg-6 col-xl-3 mb-4">
+			<div class="card bg-primary text-white h-100">
+				<div class="card-body">
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="me-3">
+							<div class="text-white-75 small">Nombre d'utilisateur</div>
+							<div class="text-lg fw-bold">{{ users | length }}</div>
+						</div>
+					</div>
+				</div>
+                <div class="card-footer d-flex align-items-center justify-content-between small">
+                <a href="{{ path('app_register')}}">Ajouter un utilisateur</a>
+                <div class="text-white">+</div>
+
+                </div>
+			</div>
+		</div>
+		<div class="col-lg-6 col-xl-3 mb-4">
+			<div class="card bg-info text-white h-100">
+				<div class="card-body">
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="me-3">
+							<div class="text-white-75 small">Nombre de clients</div>
+
+							<div class="text-lg fw-bold">{{ clients | length }}</div>
+						</div>
+					</div>
+				</div>
+                <div class="card-footer d-flex align-items-center justify-content-between small">
+                <a href="">Associer un client à son entreprise</a>
+                <div class="text-white">+</div>
+                </div>
+			</div>
+		</div>
+		<div class="col-lg-6 col-xl-3 mb-4">
+			<div class="card bg-warning text-white h-100">
+				<div class="card-body">
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="me-3">
+							<div class="text-white-75 small">Message reçu community management</div>
+							<div class="text-lg fw-bold">{{ entreprises | length }}</div>
+						</div>
+					</div>
+				</div>
+                <div class="card-footer d-flex align-items-center justify-content-between small">
+                <a href="{{ path('app_message_cm_new') }}">Envoyer du contenu au CM</a>
+                <div class="text-white">+</div>
+                </div>
+			</div>
+		</div>
+	</div>
+</section>

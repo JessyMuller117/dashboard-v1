@@ -6,10 +6,12 @@ use App\Entity\Entreprise;
 use App\Form\EntrepriseType;
 use App\Repository\EntrepriseRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/commercial/entreprise')]
 class EntrepriseController extends AbstractController
@@ -23,7 +25,7 @@ class EntrepriseController extends AbstractController
     }
 
     #[Route('/new', name: 'app_entreprise_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntrepriseRepository $entrepriseRepository,  ManagerRegistry $doctrine): Response
+    public function new(Request $request, SluggerInterface $slugger, EntrepriseRepository $entrepriseRepository,  ManagerRegistry $doctrine): Response
     {
         $entreprise = new Entreprise();
         $form = $this->createForm(EntrepriseType::class, $entreprise,);
@@ -31,6 +33,35 @@ class EntrepriseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             
+
+            // EXEMPLE DE CODE POUR LA GESTION D'UNE IMAGE OU D'UN FICHIER
+
+            // $siretFile = $form->get('siret')->getData();
+            //  // this condition is needed because the 'brochure' field is not required
+            // // so the PDF file must be processed only when a file is uploaded
+            // if ($siretFile) {
+            //     $originalFilename = pathinfo($siretFile->getClientOriginalName(), PATHINFO_FILENAME);
+            //     // this is needed to safely include the file name as part of the URL
+            //     $safeFilename = $slugger->slug($originalFilename);
+            //     $newFilename = $safeFilename.'-'.uniqid().'.'.$siretFile->guessExtension();
+
+            //     // Move the file to the directory where brochures are stored
+            //     try {
+            //         $siretFile->move(
+            //             $this->getParameter('images_directory'),
+            //             $newFilename
+            //         );
+            //     } catch (FileException $e) {
+            //         // ... handle exception if something happens during file upload
+            //     }
+
+            //     // updates the 'brochureFilename' property to store the PDF file name
+            //     // instead of its contents
+            //     $entreprise->setSiret ($newFilename);
+            // }
+
+            
+
             $entreprise->setCommercial($this->getUser());
             
             $entrepriseRepository->add($entreprise);

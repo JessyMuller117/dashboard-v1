@@ -1,0 +1,32 @@
+<nav id="menu-principal">
+	<div class="navbar-logo">
+		<a class="logo" href="#"><img class="class-fluid" src="/uploads/logo-n3web.png" alt=""></a>
+        <button class="btn btn-menu btn-open-menu"><img class="img-fluid" src="/uploads/icons8-menu-arrondi-80.png" alt=""></button>
+        <button class="btn btn-menu btn-close-menu"><img class="img-fluid" src="/uploads/icons8-effacer-80.png" alt=""></button>
+	</div>
+	<div class="list-menu">
+		<div class="item-menu">
+			<a class="nav-link" href="https://n3web.fr">N3web le site</a>
+            
+		</div>
+		<div class="item-menu">
+			<a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
+		</div>
+		<div class="item-menu">
+			<a class="nav-link" href="{{path('app_account_n3web')}}">Liste des collaborateurs</a>
+		</div>
+		<div class="item-menu">
+			<a class="nav-link" href="{{path('app_account_client')}}">Liste des clients</a>
+		</div>
+		<div class="item-menu">
+			<a class="nav-link" href="{{path('app_entreprise_index')}}">Liste des entreprises</a>
+		</div>
+		<div class="item-menu">
+			<a class="nav-link" href="{{path('app_account_user')}}">Tous les utilisateurs</a>
+		</div>
+		<div class="item-menu">
+			<a class="nav-link" href="{{path('app_message_cm_index')}}">Tous les messages</a>
+		</div>
+	</div>
+
+</nav>

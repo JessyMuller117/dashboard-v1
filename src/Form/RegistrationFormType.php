@@ -21,14 +21,6 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Commercial' => 'ROLE_COMMERCIAL',
@@ -42,17 +34,20 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Rôles' 
             ])
             ->add('collaborateur_neweb', CheckboxType::class,[
-                'label' => 'Cet utitlisateur fait parti de N3web ?',
-                'required' => true,
+                'label' => 'Cet utitisateur fait parti de N3web ?',
+                'required' => false,
             ])
             ->add('nom')
             ->add('prenom')
             ->add('telephone')
-            // ->add('employe', EntityType::class,[
-            //     'class' => Entreprise::class,
-            //     'choice_label' => 'nom_entreprise'
-            // ])
-
+            ->add('employe', EntityType::class,[
+                'class' => Entreprise::class,
+                'choice_label' => 'nom_entreprise',
+                'required' => false,
+                'placeholder' => 'Est ce que cet utilisateur est associé à une entreprise ?',
+                'empty_data' => null
+                    
+            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -67,6 +62,14 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
+                    ]),
+                ],
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
                     ]),
                 ],
             ])

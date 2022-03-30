@@ -1,6 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ul li{
+    list-style-type: none;
+}
+
+a{
+    color: inherit;
+}
+
 body {
     background-color: lightgray;
 }
+
+/* CSS DE LA PAGE REGISTER */
+
+#section-register{
+    padding-top: 120px;
+}
+
+/* CSS GESTION DES ENTREPRISES */
+
+.gestion-entreprise{
+    padding-top: 80px;
+}
+
+/* CSS GESTION DES UTILISTEURS */
+.page-list-utilisateur{
+    padding-top: 80%;
+}
+
+.carte-user{
+    border-radius: 3px;
+}
+
+
+/*CSS DU MENU DU DASHBOARD partials/_menu.html.twig*/
+
+#menu-principal{
+    z-index: 10;
+    position: fixed;
+    height: 100%;
+    width: 300px;
+    top: 0;
+    left: -295px;
+    background-color: #3CB5C6;
+    display: flex;
+    border-right: #307b85 solid 5px;
+    flex-direction: column;
+}
+
+#menu-principal .navbar-logo{
+    position: relative;
+    text-align: center;
+    border-bottom: rgb(96, 95, 95) solid 3px;
+    padding-bottom: 10px;
+}
+
+#menu-principal .logo img{
+    width: 40%;
+}
+
+#menu-principal .btn-menu{
+    width: 20%;
+}
+
+#menu-principal .btn-menu:focus{
+    color: inherit;
+}
+
+#menu-principal .navbar-logo .btn-open-menu{
+    position: absolute;
+    background-color: white;
+    top: 0px;
+    right: -52px;
+    border-radius: 0 3px 3px 0;
+    background-color: #3CB5C6;
+    border-top: 5px #307b85 solid;
+    border-right: 5px #307b85 solid;
+    border-bottom: 5px #307b85 solid;
+    transition: all ease .4s;
+    opacity: 1;
+    visibility: visible;
+}
+
+#menu-principal .navbar-logo .btn-close-menu{
+    position: absolute;
+    background-color: white;
+    top: 0px;
+    right: -1px;
+    transition: all ease .3s;
+    border-radius: 3px 0 0 3px;
+    background-color: #3CB5C6;
+    border-top: 5px #307b85 solid;
+    border-left: 5px #307b85 solid;
+    border-bottom: 5px #307b85 solid;
+    transition: all ease .4s;
+}
+
+#menu-principal .list-menu{
+    width: 100%;
+    padding-top: 20px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-menu .item-menu{
+    border-bottom: 1px rgb(96, 95, 95) solid;
+    transition: all ease .3s;
+}
+
+.list-menu .item-menu a{
+    color: white;
+}
+
+.list-menu .item-menu:hover{
+    background-color: #307b85;
+}
+
+
+
 
 .card-list-neweb .card-body{
     display: flex;

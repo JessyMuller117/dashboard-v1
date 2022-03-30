@@ -57,7 +57,7 @@ class AccountController extends AbstractController
         ]);
     }
 
-    #Permet d'afficherle profil de l'utilisateur connecter
+    #Permet d'afficher le profil de l'utilisateur connecter
     #[Route('/account', name: 'app_account_index')]
     #[IsGranted('ROLE_USER')]
     public function myAccount(MessageCMRepository $messageCMRepository){
@@ -80,7 +80,7 @@ class AccountController extends AbstractController
 
     #Function qui devrait m'afficher tous les clients
     #[Route('/account/client', name: 'app_account_client')]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('ROLE_CLIENT')]
     public function listClient(UserRepository $userRepository){
         return $this->render('account/list_client.html.twig', [
             'users' => $userRepository->findAll(),

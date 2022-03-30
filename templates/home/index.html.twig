@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}N3WEB{% endblock %}
+{% block title %}N3WEB
+{% endblock %}
 
 {% block body %}
 
+	<header class="container-fluid pt-5 pb-5">
+		<div class="row justify-content-center">
+			<div class="col-10 pt-5">
+				<h1 class="h1 text-center">Bienvenue jeune Padawan</h1>
+			</div>
+		</div>
+	</header>
+    {% include "/partials/_home-admin.html.twig" %}
 
-<div class="example-wrapper">
-    <h1>Salut la  {{home_message}}</h1>
-
-    <p>Bienvenue sur le Tableau de bord de l'équipe, il est en construction alors encore un peu de patience, merci.</p>
-    
-</div>
 {% endblock %}
