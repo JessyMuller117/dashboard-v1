@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New MessageCM{% endblock %}
+{% block title %}Nouveau Message{% endblock %}
 
 {% block body %}
-    <h1>Create new MessageCM</h1>
 
     {{ include('message_cm/_form.html.twig') }}
-
-    <a class="btn btn-primary" href="{{ path('app_account_index') }}">Mes messages déjà envoyé</a>
+    <a class="btn btn-info mt-5" href="{{ path('app_account_index') }}">Mes messages déjà envoyé</a>
 {% endblock %}
