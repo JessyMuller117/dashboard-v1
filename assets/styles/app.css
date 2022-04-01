@@ -11,7 +11,7 @@ a{
     color: inherit;
 }
 
-body {
+.body-admin {
     background-image: url('/public/img/bg-admin.jpeg');
     background-repeat: none;
     background-size: cover;
@@ -196,4 +196,5 @@ body {
     position: fixed;
     top: 0;
     margin-left: 10%;
+    z-index: 50;
 }

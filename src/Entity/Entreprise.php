@@ -36,9 +36,13 @@ class Entreprise
     #[ORM\OneToMany(mappedBy: 'employe', targetEntity: User::class)]
     private $employes;
 
+    #[ORM\Column(type: 'datetime_immutable')]
+    private $createAt;
+
     public function __construct()
     {
         $this->employes = new ArrayCollection();
+        $this->createAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -144,6 +148,18 @@ class Entreprise
                 $employe->setEmploye(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreateAt(): ?\DateTimeImmutable
+    {
+        return $this->createAt;
+    }
+
+    public function setCreateAt(\DateTimeImmutable $createAt): self
+    {
+        $this->createAt = $createAt;
 
         return $this;
     }
