@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Agence;
 use App\Entity\Entreprise;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -36,6 +37,13 @@ class RegistrationFormType extends AbstractType
             ->add('collaborateur_neweb', CheckboxType::class,[
                 'label' => 'Cet utitisateur fait parti de N3web ?',
                 'required' => false,
+            ])
+            ->add('agence', EntityType::class,[
+                'class' => Agence::class,
+                'choice_label' => 'secteur',
+                'required' => false,
+                'placeholder' => 'Ce collaborateur fait parti de quel Agence ?',
+                'empty_data' => null
             ])
             ->add('nom')
             ->add('prenom')
