@@ -80,6 +80,18 @@ a{
     color:#307b85;
 }
 
+/*CSS DU Admin HOME DU DASHBOARD partials/_home.html.twig*/
+.div-numb{
+    display: flex;
+    justify-content: space-around;
+}
+
+.div-numb .number{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 
 /*CSS DU MENU DU DASHBOARD partials/_menu.html.twig*/
 

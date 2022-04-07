@@ -3,7 +3,8 @@
 		<div class="col-4">
 			<div class="card bg-holo text-center">
 				<div class="card-header text-white">
-					Dernier Client: {{last_entreprise.nomentreprise }}
+					Dernier Client:
+					{{last_entreprise.nomentreprise }}
 				</div>
 				<div class="card-body">
 					<h5 class="card-title text-white"></h5>
@@ -11,7 +12,8 @@
 					<a href="{{ path('app_entreprise_show', {'id': last_entreprise.id}) }}" class="btn btn-primary">Voir le profil</a>
 				</div>
 				<div class="card-footer text-white">
-					Signé par {{last_entreprise.commercial.prenom}}
+					Signé par
+					{{last_entreprise.commercial.prenom}}
 				</div>
 			</div>
 		</div>
@@ -41,6 +43,29 @@
 				<div class="card-footer text-white">
 					{{last_evenement.date|date('m/d/Y', "Europe/Paris")}}
 				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="section-numb" class="pt-5 container">
+	<div class="row">
+		<div class="col-12 bg-holo div-numb">
+			<div class="number">
+				<p class="numb-reference fs-3 text-white text-center">11</p>
+				<h5 class="text-white">Références</h5>
+			</div>
+			<div class="number">
+				<p class="numb-page fs-3 text-white text-center">10001</p>
+				<h5 class="text-white">Page indexées</h5>
+			</div>
+			<div class="number">
+				<p class="numb-satisfaction fs-3 text-white text-center">90%</p>
+				<h5 class="text-white">Taux de Satisfaction</h5>
+			</div>
+			<div class="number">
+				<p class="numb-cafe fs-3 text-white text-center">56</p>
+				<h5 class="text-white">Litres de café</h5>
 			</div>
 		</div>
 	</div>
@@ -168,13 +193,13 @@
 		</div>
 	</div>
 
-{# {% for entreprise in entreprises %}
-	{{entreprise.createat|date('Y-m-d')}}
-{% endfor %} #}
-{# 
-<pre>
-	{{ dump(last_entreprise) }}
-</pre>
-{{last_entreprise.createat|format_datetime() }} #}
+	{# {% for entreprise in entreprises %}
+			{{entreprise.createat|date('Y-m-d')}}
+		{% endfor %} #}
+	{# 
+		<pre>
+			{{ dump(last_entreprise) }}
+		</pre>
+		{{last_entreprise.createat|format_datetime() }} #}
 
 </section>
