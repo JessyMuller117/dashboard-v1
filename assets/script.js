@@ -20,6 +20,14 @@ btnActionOpen.style.opacity =  "0";
 menuPrincipal.style.transition = "all ease .4s";
 });
 
-console.log('fjoiufrhoi')
 
 // script pour associer un utilisateur et son entreprise
+
+// script pour les grades
+
+// un grade c'est un nom une recompense un pourcentage
+
+//Date du jour
+// var date = new Date();
+// var options = {weekday: "long", year: "numeric", month: "long", day: "2-digit"};
+// alert(date.toLocaleDateString("fr-FR", options));     
